@@ -1,8 +1,11 @@
 package br.edu.ifsp.orderflow;
 
+
 import br.edu.ifsp.orderflow.domain.Cliente;
 import br.edu.ifsp.orderflow.domain.ItemPedido;
+import br.edu.ifsp.orderflow.domain.Pedido;
 import br.edu.ifsp.orderflow.domain.Produto;
+import br.edu.ifsp.orderflow.infra.InMemoryEstoqueService;
 
 import java.math.BigDecimal;
 
@@ -27,23 +30,22 @@ public class Main {
                 "Monitor 27 pol",
                 new BigDecimal("1800.00")
         );
-        System.out.println(mouse);
-        System.out.println(teclado);
-        System.out.println(monitor);
 
-        Cliente cliente1 = new Cliente(
-                "1",
-                "jose",
-                "jose@mail.com"
-        );
+        Cliente ana = new Cliente("Ana", "ana@email.com");
+        Cliente bruno = new Cliente("Bruno", "bruno@email.com");
 
-        System.out.println(cliente1);
+        Pedido pedido1 = new Pedido(ana);
+        pedido1.adicionarItem(new ItemPedido(mouse, 2));
+        pedido1.adicionarItem(new ItemPedido(teclado, 1));
 
-        ItemPedido item1 = new ItemPedido(
-                monitor,
-                3
-        );
+        Pedido pedido2 = new Pedido(bruno);
+        pedido2.adicionarItem(new ItemPedido(monitor, 2));
+        pedido2.adicionarItem(new ItemPedido(teclado, 5));
 
-        System.out.println(item1);
+        InMemoryEstoqueService estoque = new InMemoryEstoqueService();
+
+        estoque.adicionarEstoque(mouse, 1);
+        estoque.adicionarEstoque(mouse, 1);
+        System.out.println(pedido1);
     }
 }
