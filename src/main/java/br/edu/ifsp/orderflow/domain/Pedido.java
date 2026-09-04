@@ -59,8 +59,12 @@ public class Pedido {
         return status;
     }
 
+    public String getIdCurto() {
+        return this.id.substring(0, 8);
+    }
+
     @Override
     public String toString() {
-        return "Pedido[ ID: " + this.id + ", Status: " + this.status + ", Total R$: " + this.calcularTotal() + "]";
+        return "Pedido[ ID: " + this.getIdCurto() + ", Status: " + this.status + ", Total R$: " + this.calcularTotal() + "]";
     }
 }

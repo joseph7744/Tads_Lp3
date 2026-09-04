@@ -24,9 +24,17 @@ public class InMemoryEstoqueService implements IEstoqueService {
         return this.estoque.getOrDefault(produto.getId(), 0);
     }
 
+    private void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     @Override
     public boolean reservar(Pedido pedido) {
-        
+
         List<ItemPedido> listaDeItens = pedido.getItens();
 
         // Conferir se todos os produtos têm estoque
@@ -38,6 +46,8 @@ public class InMemoryEstoqueService implements IEstoqueService {
                 return false;
             }
         }
+
+        this.sleep(50);
 
         for (ItemPedido item : listaDeItens) {
 
@@ -52,6 +62,16 @@ public class InMemoryEstoqueService implements IEstoqueService {
 
     @Override
     public void liberar(Pedido pedido) {
+
+//        List<ItemPedido> itens = pedido.getItens();
+//
+//        for (ItemPedido item : itens) {
+//
+//            Produto produto = item.getProduto();
+//            int disponivel = this.quantidadeDisponivel(item.getProduto());
+//            this.estoque.put(produto.getId(), disponivel + item.getQuantidade());
+//        }
+
         for (ItemPedido item : pedido.getItens()) {
             this.adicionarEstoque(item.getProduto(), item.getQuantidade());
         }
