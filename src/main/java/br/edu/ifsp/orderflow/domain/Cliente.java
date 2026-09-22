@@ -2,7 +2,7 @@ package br.edu.ifsp.orderflow.domain;
 
 import java.util.UUID;
 
-public class Cliente {
+public class  Cliente {
 
     private final String id;
     private final String nome;
