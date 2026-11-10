@@ -32,7 +32,7 @@ public class PagamentoAprovadoNotificacaoHandler implements IEventHandler<Pagame
 
             this.notificacaoService.notificar(
                     pedido.getCliente(),
-                    "Pagamento aprovador! Pedido " + pedido.getIdCurto()
+                    "Pagamento aprovado! Pedido " + pedido.getIdCurto()
                             + " confirmado (Transação "+ event.transacaoId() + ")"
             );
         }
